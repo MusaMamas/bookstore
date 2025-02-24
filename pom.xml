@@ -58,10 +58,9 @@
     		<artifactId>spring-boot-starter-data-rest</artifactId>
 			</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.33</version>
-			<scope>runtime</scope>
+   			<groupId>com.h2database</groupId>
+    		<artifactId>h2</artifactId>
+    		<scope>runtime</scope>
 		</dependency>
 	</dependencies>
 
