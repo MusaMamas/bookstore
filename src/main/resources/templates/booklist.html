@@ -5,6 +5,10 @@
 </head>
 <body>
     <h2>Books</h2>
+    <p>Logged in as: <span sec:authentication="name"></span></p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
     <table border="1">
         <tr>
             <th>Author</th>
