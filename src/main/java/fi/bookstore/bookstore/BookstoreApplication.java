@@ -4,17 +4,46 @@ import fi.bookstore.bookstore.model.Book;
 import fi.bookstore.bookstore.model.Category;
 import fi.bookstore.bookstore.repository.BookRepository;
 import fi.bookstore.bookstore.repository.CategoryRepository;
+import fi.bookstore.bookstore.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import fi.bookstore.bookstore.model.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class BookstoreApplication {
     public static void main(String[] args) {
         SpringApplication.run(BookstoreApplication.class, args);
     }
+
+    @Bean
+public CommandLineRunner addUsers(UserRepository userRepository) {
+    return (args) -> {
+        if (userRepository.findByUsername("admin") == null) {
+            User admin = new User();
+            admin.setUsername("admin");
+            admin.setPassword(new BCryptPasswordEncoder().encode("admin"));
+            admin.setRole("ADMIN");
+            admin.setEmail("admin@bookstore.com");
+            userRepository.save(admin);
+        }
+
+        if (userRepository.findByUsername("user") == null) {
+            User user = new User();
+            user.setUsername("user");
+            user.setPassword(new BCryptPasswordEncoder().encode("password"));
+            user.setRole("USER");
+            user.setEmail("user@bookstore.com");
+            userRepository.save(user);
+        }
+
+        System.out.println("Users added to the database!");
+    };
+}
+
 
     @Bean
 public CommandLineRunner demo(BookRepository bookRepository, CategoryRepository categoryRepository) {
