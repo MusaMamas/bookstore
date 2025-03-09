@@ -1,7 +1,6 @@
 package fi.bookstore.bookstore.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -79,3 +78,4 @@ public class Book {
         this.category = category;
     }
 }
+
